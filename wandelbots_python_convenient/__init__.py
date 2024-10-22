@@ -2,7 +2,7 @@ import uvicorn
 from loguru import logger
 import os
 
-from wandelbots_python_plan_motion.app import app
+from wandelbots_python_convenient.app import app
 
 
 def main(host: str = "0.0.0.0", port: int = 3000):

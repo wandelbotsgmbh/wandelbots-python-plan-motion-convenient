@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "wandelbots_python_plan_motion"
+name = "wandelbots_python_convenient"
 version = "0.0.1"
 description = ""
 readme = "README.md"
@@ -9,7 +9,7 @@ package-mode = false
 python = "^3.9"
 fastapi = "^0.111.0"
 loguru = "^0.7.2"
-wandelbots-api-client = "^24.1.34"
+wandelbots = "^0.3.4"
 python-decouple = "^3.8"
 requests = "^2.32.3"
 
@@ -21,4 +21,4 @@ build-backend = "poetry.core.masonry.api"
 pylint = "2.17"
 
 [tool.poetry.scripts]
-serve = "wandelbots_python_plan_motion:main"
+serve = "wandelbots_python_convenient:main"

@@ -1,11 +1,12 @@
-import wandelbots_api_client as wb
 import requests
 from decouple import config
 from requests.auth import HTTPBasicAuth
+from wandelbots import Instance
+from urllib.parse import urlparse
 
 CELL_ID = config("CELL_ID", default="cell", cast=str)
 
-def get_api_client() -> wb.ApiClient:
+def get_api_client() -> Instance:
     """Creates a new API client for the wandelbots API.
     """
     # if there is basic auth required (e.g. when running this service locally)
@@ -14,16 +15,15 @@ def get_api_client() -> wb.ApiClient:
 
     base_url = get_base_url(basic_user, basic_pwd)
 
-    client_config = wb.Configuration(host=base_url)
-    client_config.verify_ssl = False
+    return create_instance(base_url=base_url, user=basic_user, password=basic_pwd)
 
-    if basic_user is not None and basic_pwd is not None:
-        client_config.username = basic_user
-        client_config.password = basic_pwd
-
-    return wb.ApiClient(client_config)
-
-
+def create_instance(base_url, user, password) -> Instance:
+    parsed_url = urlparse(base_url)
+    if parsed_url.scheme == "https://":
+        return Instance(url=base_url, user=user, password=password)
+    else:
+        return Instance(url=base_url)
+    
 def get_base_url(basic_user, basic_pwd) -> str:
     # in-cluster it is the api-gateway service
     # when working with a remote instance one needs to provide the host via env variable
@@ -32,12 +32,11 @@ def get_base_url(basic_user, basic_pwd) -> str:
     api_host = api_host.replace("http://", "")
     api_host = api_host.replace("https://", "")
     api_host = api_host.rstrip("/")
-    api_base_path = "/api/v1"
     protocol = get_protocol(api_host, basic_user, basic_pwd)
     if protocol is None:
         msg = f"Could not determine protocol for host {api_host}. Make sure the host is reachable."
         raise Exception(msg)
-    return f"{protocol}{api_host}{api_base_path}"
+    return f"{protocol}{api_host}"
 
 
 # get the protocol of the host (http or https)
