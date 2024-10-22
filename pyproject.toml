@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "wandelbots_python_plan_motion"
+version = "0.0.1"
+description = ""
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.111.0"
+loguru = "^0.7.2"
+wandelbots-api-client = "^24.1.34"
+python-decouple = "^3.8"
+requests = "^2.32.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "2.17"
+
+[tool.poetry.scripts]
+serve = "wandelbots_python_plan_motion:main"
