@@ -9,7 +9,7 @@ package-mode = false
 python = "^3.9"
 fastapi = "^0.111.0"
 loguru = "^0.7.2"
-wandelbots = "^0.3.4"
+wandelbots = "^0.5.1"
 python-decouple = "^3.8"
 requests = "^2.32.3"
 
