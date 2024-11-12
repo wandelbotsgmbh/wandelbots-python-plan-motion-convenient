@@ -24,4 +24,4 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 WORKDIR /app
 COPY . .
 
-ENTRYPOINT ["python", "-m", "wandelbots_python_plan_motion"]
+ENTRYPOINT ["python", "-m", "wandelbots_python_convenient"]
