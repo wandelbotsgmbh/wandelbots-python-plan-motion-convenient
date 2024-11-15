@@ -89,12 +89,12 @@ async def move_robot(offset_mm: int):
     settings = CommandSettings(position_blending=10)
 
     trajectory = [
-        planner.jptp(joints=initial_joints),
+        planner.joint_ptp(joints=initial_joints),
         *[
             planner.line(pose=pose, settings=settings)
             for pose in poses
         ],
-        planner.jptp(joints=initial_joints),
+        planner.joint_ptp(joints=initial_joints),
     ]
 
     plan_result = planner.plan(
@@ -110,7 +110,7 @@ async def move_robot(offset_mm: int):
 
     logger.info("start moving...")
 
-    async for state in my_motion_group.execute_motion_stream_async(motion=plan_result.motion, speed=25, response_rate_ms=500):
+    async for state in my_motion_group.execute_motion_stream_async(plan_result=plan_result, speed=25, response_rate_ms=500):
         current_location = state.current_location_on_trajectory
         print(f"Current Location: {current_location}")
 
