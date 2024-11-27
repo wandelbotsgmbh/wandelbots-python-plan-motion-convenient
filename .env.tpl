@@ -9,8 +9,4 @@ LOG_LEVEL=info
 # These should never be defined in the .env file, only in the gitignored .env.local or 
 # in the environment variables of the deployment.
 ###
-
-# For basic auth with the API
-NOVA_USERNAME="{{ .InstanceInformation.BasicAuth.Username }}"
-NOVA_PASSWORD="{{ .InstanceInformation.BasicAuth.Password }}"
 NOVA_ACCESS_TOKEN="{{ .InstanceInformation.AccessToken }}"
