@@ -1,5 +1,5 @@
 # provide the host where the nova api is running (e.g. your virtual dev instance)
-WANDELAPI_BASE_URL="{{ .InstanceInformation.NovaApiHost }}"
+NOVA_API="{{ .InstanceInformation.NovaApiHost }}"
 CELL_ID="cell"
 LOG_LEVEL=info
 
