@@ -6,19 +6,36 @@ readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 fastapi = "^0.111.0"
 loguru = "^0.7.2"
-wandelbots = "^0.5.6"
+wandelbots-nova = "^0.6.1"
 python-decouple = "^3.8"
 requests = "^2.32.3"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.8.2"
+pytest = "^8.3.4"
+pytest-asyncio = "^0.24.0"
+mypy = "^1.13.0"
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_unreachable = true
+warn_unused_configs = true
+junit_xml = "reports/mypy/mypy.xml"
+show_error_context = true
+warn_unused_ignores = true
+strict_equality = true
+mypy_path = ".mypy_stubs"
+files = "wandelbots_python_convenient"
+namespace_packages = true
+explicit_package_bases = true
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.group.dev.dependencies]
-pylint = "2.17"
 
 [tool.poetry.scripts]
 serve = "wandelbots_python_convenient:main"
